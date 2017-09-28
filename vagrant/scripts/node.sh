@@ -53,18 +53,18 @@ pushd /var/cache/yum/rpms
 # ignore error codes for offline cache (where file does not exist the following commands should fail on rpm --checksig)
 wget --timestamp http://rpms.famillecollet.com/enterprise/remi-release-6.rpm 2>&1 || true
 wget --timestamp http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm 2>&1 || true
-wget --timestamp https://repo.varnish-cache.org/redhat/varnish-4.1.el6.rpm 2>&1 || true
+#wget --timestamp https://repo.varnish-cache.org/redhat/varnish-4.1.el6.rpm 2>&1 || true
 wget --timestamp http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm 2>&1 || true
 
 rpm --checksig remi-release-6.rpm
 rpm --checksig nginx-release-centos-6-0.el6.ngx.noarch.rpm
-rpm --checksig varnish-4.1.el6.rpm
+#rpm --checksig varnish-4.1.el6.rpm
 rpm --checksig mysql-community-release-el6-5.noarch.rpm
 
 yum install -y epel-release
 yum install -y remi-release-6.rpm
 yum install -y nginx-release-centos-6-0.el6.ngx.noarch.rpm
-yum install -y varnish-4.1.el6.rpm
+#yum install -y varnish-4.1.el6.rpm
 
 ## only setup mysql community rpm if mysql 56 is requested
 [ "$MYSQL_VERSION" == "56" ] && yum install -y /var/cache/yum/rpms/mysql-community-release-el6-5.noarch.rpm
@@ -109,7 +109,7 @@ fi
 :: installing generic guest tooling
 ########################################
 
-yum install -y bash-completion bc man git rsync mysql pv tree lsof ack
+yum install -y bc man git rsync mysql pv tree lsof ack
 rsync -av --ignore-existing ./guest/bin/ /usr/local/bin/
 
 ########################################
